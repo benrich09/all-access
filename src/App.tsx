@@ -16,6 +16,7 @@ import {
   Building2,
   Handshake,
   HelpCircle,
+  User,
 } from 'lucide-react'
 import { FaWhatsapp, FaLinkedinIn, FaTwitter, FaInstagram, FaFacebookF } from 'react-icons/fa'
 
@@ -101,8 +102,8 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
           </div>
         ) : step === 'choose' ? (
           <div className="p-8">
-            <h3 className="font-display text-2xl font-medium mb-1">How can we help</h3>
-            <p className="text-gray-500 text-sm mb-6">Choose the option that best matches your need</p>
+            <h3 className="font-display text-2xl font-medium mb-1">How can we help you</h3>
+            <p className="text-gray-500 text-sm mb-6">Select one option and we will guide you from there</p>
             <div className="space-y-3">
               {options.map((o) => (
                 <button
@@ -139,29 +140,41 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
             </h3>
             <p className="text-gray-500 text-sm mb-6">Fill in the details and we will respond soon</p>
             <div className="space-y-4">
-              <input
-                required
-                type="text"
-                placeholder="Full name"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
-              />
-              <input
-                required
-                type="email"
-                placeholder="Work email"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
-              />
-              <input
-                type="tel"
-                placeholder="Phone number"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
-              />
-              <textarea
-                required
-                rows={3}
-                placeholder="Tell us more about what you need"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition resize-none"
-              />
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Full name</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Your full name"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Work email</label>
+                <input
+                  required
+                  type="email"
+                  placeholder="you@company.com"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Phone number</label>
+                <input
+                  type="tel"
+                  placeholder="07XX XXX XXX"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Message</label>
+                <textarea
+                  required
+                  rows={3}
+                  placeholder="Tell us more about what you need"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition resize-none"
+                />
+              </div>
               <button
                 type="submit"
                 className="w-full py-3.5 bg-black text-white font-medium rounded-full text-sm hover:bg-gray-800 transition flex items-center justify-center gap-2"
@@ -206,7 +219,7 @@ function Navbar({
       <div className="max-w-6xl mx-auto px-5">
         <div className="flex justify-between items-center h-[72px]">
           <button onClick={() => setPage('home')} className="flex items-center">
-            <img src="/logo.png" alt="All Access" className="h-21 w-auto object-contain" />
+            <img src="/logo.png" alt="All Access" className="h-14 w-auto object-contain" />
           </button>
           <nav className="hidden md:flex items-center gap-1">
             {link('home', 'Home')}
@@ -270,8 +283,8 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden bg-gray-950">
+      {/* Hero – full viewport */}
+      <section className="relative min-h-[calc(100vh-72px)] flex items-center overflow-hidden bg-gray-950">
         <div className="absolute inset-0">
           <img
             src="/hero-bg.png"
@@ -283,7 +296,7 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
         </div>
         <div
           ref={hero.ref}
-          className={`relative max-w-6xl mx-auto px-5 py-24 sm:py-32 w-full ${hero.visible ? 'animate-fade-up' : 'opacity-0'}`}
+          className={`relative max-w-6xl mx-auto px-5 py-16 sm:py-24 w-full ${hero.visible ? 'animate-fade-up' : 'opacity-0'}`}
         >
           <p className="text-gray-400 text-xs font-semibold uppercase tracking-[0.22em] mb-5">
             Customer Experience Outsourcing
@@ -311,10 +324,10 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
         </div>
       </section>
 
-      {/* Services preview */}
+      {/* Services preview – full viewport */}
       <section className="py-20 sm:py-28 bg-white">
-        <div ref={services.ref} className={`max-w-6xl mx-auto px-5 ${services.visible ? 'animate-fade-up' : 'opacity-0'}`}>
-          <div className="text-center mb-14">
+        <div ref={services.ref} className={`max-w-6xl mx-auto px-5 w-full ${services.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <div className="text-center mb-12 sm:mb-14">
             <h2 className="font-display text-3xl sm:text-4xl font-medium text-gray-900 mb-3">
               Solutions built for growing businesses
             </h2>
@@ -348,9 +361,9 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
         </div>
       </section>
 
-      {/* Our people */}
+      {/* Our people – full viewport */}
       <section className="py-20 sm:py-28 bg-gray-950 text-white overflow-hidden">
-        <div ref={people.ref} className={`max-w-6xl mx-auto px-5 ${people.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+        <div ref={people.ref} className={`max-w-6xl mx-auto px-5 w-full ${people.visible ? 'animate-fade-up' : 'opacity-0'}`}>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="font-display text-3xl sm:text-4xl font-medium mb-5 leading-snug">
@@ -371,12 +384,8 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
                 <img
                   src="/agent-man.png"
                   alt="All Access support agent"
-                  className="rounded-2xl object-cover w-full h-48 sm:h-64 lg:h-72 shadow-xl"
+                  className="rounded-2xl object-cover w-full h-56 sm:h-72 lg:h-80 shadow-xl"
                 />
-                <div className="rounded-2xl bg-white/5 border border-white/10 p-5 hidden sm:block">
-                  <p className="text-2xl font-display font-medium">24/7</p>
-                  <p className="text-xs text-gray-400 mt-1">Premium support available</p>
-                </div>
               </div>
               <div className="space-y-3 sm:space-y-4 pt-8 sm:pt-12">
                 <img
@@ -390,28 +399,40 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 sm:py-20 bg-white border-y border-gray-100">
-        <div ref={stats.ref} className={`max-w-6xl mx-auto px-5 ${stats.visible ? 'animate-fade-up' : 'opacity-0'}`}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+      {/* Why choose us – simple clear points */}
+      <section className="py-20 sm:py-28 bg-white border-y border-gray-100">
+        <div ref={stats.ref} className={`max-w-6xl mx-auto px-5 w-full ${stats.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl font-medium text-gray-900 mb-3">
+              Why businesses choose All Access
+            </h2>
+            <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
+              Practical benefits that help your team focus on what matters most
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { n: '24/7', l: 'Premium support' },
-              { n: '7+', l: 'Service lines' },
-              { n: 'B2B', l: 'Business focused' },
-              { n: 'EA', l: 'East Africa reach' },
-            ].map((item) => (
-              <div key={item.l}>
-                <p className="font-display text-3xl sm:text-4xl font-medium text-gray-900 mb-1">{item.n}</p>
-                <p className="text-sm text-gray-500">{item.l}</p>
+              { title: 'Always available', desc: 'Standard hours plus optional 24 hour coverage when you need it' },
+              { title: 'Multi channel support', desc: 'Phone WhatsApp email and social handled in one place' },
+              { title: 'Clear reporting', desc: 'Regular updates so you know how customers are being served' },
+              { title: 'Local and ready', desc: 'Based in Dar es Salaam and built for East African businesses' },
+            ].map((item, i) => (
+              <div
+                key={item.title}
+                className={`p-6 rounded-2xl border border-gray-100 bg-gray-50/80 hover:bg-white hover:shadow-md transition ${stats.visible ? 'animate-fade-up' : ''}`}
+                style={{ animationDelay: `${i * 90}ms` }}
+              >
+                <p className="font-semibold text-gray-900 mb-2 text-[15px]">{item.title}</p>
+                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners */}
+      {/* Partners – full viewport */}
       <section className="py-20 sm:py-28 bg-gray-50">
-        <div ref={partners.ref} className={`max-w-6xl mx-auto px-5 ${partners.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+        <div ref={partners.ref} className={`max-w-6xl mx-auto px-5 w-full ${partners.visible ? 'animate-fade-up' : 'opacity-0'}`}>
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-medium text-gray-900 mb-3">
               Strategic clients and partners
@@ -420,29 +441,35 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
               Trusted by organizations that value reliable customer experience
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {[
-              'Usiri Transportation',
-              'Usiri Car Rental',
-              'Usiri Bus Tickets',
-              'Sema Call',
-            ].map((name) => (
+              { name: 'Usiri Transportation', logo: '/usiritransportation.png' },
+              { name: 'Usiri Car Rental', logo: '/usiri car rentals.png' },
+              { name: 'Usiri Bus Tickets', logo: '/usiri bus ticket.png' },
+              { name: 'Sema Call', logo: '/semacall.png' },
+            ].map((p, i) => (
               <div
-                key={name}
-                className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 flex flex-col items-center justify-center min-h-[110px] hover:shadow-md hover:border-gray-200 transition"
+                key={p.name}
+                className={`bg-white rounded-2xl border border-gray-100 p-5 sm:p-6 flex flex-col items-center justify-center gap-4 min-h-[140px] sm:min-h-[160px] hover:shadow-lg hover:border-gray-200 transition duration-300 ${partners.visible ? 'animate-fade-up' : ''}`}
+                style={{ animationDelay: `${i * 80}ms` }}
               >
-                <p className="font-semibold text-gray-900 text-sm text-center">{name}</p>
-                <p className="text-[11px] text-gray-400 mt-1.5 tracking-wide uppercase">Partner</p>
+                <div className="w-full h-16 sm:h-20 flex items-center justify-center bg-gray-950 rounded-xl px-3 py-2">
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <p className="font-medium text-gray-800 text-xs sm:text-sm text-center leading-snug">{p.name}</p>
               </div>
             ))}
           </div>
-       
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 sm:py-28 bg-black text-white">
-        <div ref={cta.ref} className={`max-w-3xl mx-auto px-5 text-center ${cta.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+      {/* CTA – full viewport */}
+      <section className="py-20 sm:py-28 bg-gradient-to-br from-black via-gray-950 to-gray-900 text-white">
+        <div ref={cta.ref} className={`max-w-3xl mx-auto px-5 text-center w-full ${cta.visible ? 'animate-fade-up' : 'opacity-0'}`}>
           <h2 className="font-display text-3xl sm:text-4xl font-medium mb-5">
             Ready to strengthen your customer relationships
           </h2>
@@ -461,7 +488,7 @@ function Home({ setPage, onOpenInquiry }: { setPage: (p: Page) => void; onOpenIn
   )
 }
 
-/* ─── Services ─── */
+/* ─── Services (black gradient) ─── */
 function Services() {
   const list = [
     {
@@ -521,11 +548,11 @@ function Services() {
   ]
 
   return (
-    <div className="bg-white">
+    <div className="bg-gradient-to-b from-gray-950 via-black to-gray-950 text-white min-h-screen">
       <section className="pt-16 sm:pt-24 pb-12 sm:pb-16">
         <div className="max-w-6xl mx-auto px-5 text-center animate-fade-up">
-          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-4 text-gray-900">What we offer</h1>
-          <p className="text-gray-500 max-w-xl mx-auto text-base">
+          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-4">What we offer</h1>
+          <p className="text-gray-400 max-w-xl mx-auto text-base">
             Reliable technology driven and customer centered solutions for businesses across Tanzania and East Africa.
           </p>
         </div>
@@ -536,17 +563,17 @@ function Services() {
             {list.map((s, i) => (
               <div
                 key={s.title}
-                className="p-7 sm:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all duration-300 animate-fade-up"
+                className="p-7 sm:p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 animate-fade-up backdrop-blur-sm"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <div className="w-11 h-11 rounded-xl bg-black text-white flex items-center justify-center mb-5">
+                <div className="w-11 h-11 rounded-xl bg-white text-black flex items-center justify-center mb-5">
                   <s.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-4">{s.title}</h3>
+                <h3 className="font-semibold text-lg text-white mb-4">{s.title}</h3>
                 <ul className="space-y-2.5">
                   {s.points.map((p) => (
-                    <li key={p} className="flex gap-3 text-sm text-gray-600">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+                    <li key={p} className="flex gap-3 text-sm text-gray-400">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-500 flex-shrink-0" />
                       {p}
                     </li>
                   ))}
@@ -562,58 +589,78 @@ function Services() {
 
 /* ─── About ─── */
 function About() {
+  const overview = useInView()
+  const vision = useInView()
+  const timelineRef = useInView()
+  const teamRef = useInView()
+  const hours = useInView()
+
   const timeline = [
-    { year: 'Founded', title: 'Company established', desc: 'All Access launched to bridge communication gaps for businesses in Tanzania.' },
-    { year: 'Growth', title: 'Service expansion', desc: 'Added WhatsApp support social media management and market research capabilities.' },
-    { year: 'Today', title: 'Multi channel excellence', desc: 'Serving clients across East Africa with 24/7 premium options and CX training.' },
+    { year: '2025', title: 'Company established', desc: 'All Access launched to bridge communication gaps for businesses in Tanzania.' },
+    { year: '2026', title: 'Service expansion', desc: 'Added WhatsApp support social media management and market research capabilities.' },
+    { year: 'Today', title: 'Growing with clients', desc: 'Supporting partners across East Africa with reliable multi channel customer care.' },
   ]
 
   const team = [
-    { name: 'Support Lead', role: 'Operations', img: '/' },
-    { name: 'Care Specialist', role: 'Customer Experience', img: '/' },
-    { name: 'Training Coach', role: 'Learning and Development', img: '/' },
+    { name: 'Director / C.E.O', role: 'Leadership', img: null },
+    { name: 'Operations Manager', role: 'Operations', img: null },
+    { name: 'Support Lead', role: 'Customer Support', img: '/agent-man.png' },
+    { name: 'Care Specialist', role: 'Customer Experience', img: '/agent-woman.png' },
+    { name: 'Training Coach', role: 'Learning and Development', img: null },
+    { name: 'Support Agent', role: 'Frontline Support', img: null },
   ]
 
   return (
     <div className="bg-white">
-      <section className="pt-16 sm:pt-24 pb-12">
-        <div className="max-w-6xl mx-auto px-5 text-center animate-fade-up">
-          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-4 text-gray-900">All Access</h1>
-          <p className="text-gray-500 max-w-xl mx-auto">
-            A modern customer experience and communication outsourcing company serving Tanzania and East Africa.
+      {/* Intro */}
+      <section className="pt-20 sm:pt-28 pb-16 sm:pb-20 bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white">
+        <div className="max-w-3xl mx-auto px-5 text-center animate-fade-up">
+          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-5">About All Access</h1>
+          <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
+            We help businesses in Tanzania and East Africa deliver professional customer experiences without building large in house teams.
           </p>
         </div>
       </section>
 
-      <section className="pb-16 sm:pb-20">
-        <div className="max-w-3xl mx-auto px-5 space-y-12 animate-fade-up">
-          <div>
-            <h2 className="font-display text-2xl font-medium text-gray-900 mb-4">Business overview</h2>
-            <p className="text-gray-600 leading-relaxed">
-              All Access was established to provide professional customer support and engagement solutions for businesses. We operate as a B2B service provider enabling organizations to outsource customer service operations while focusing on their core functions.
-            </p>
-          </div>
+      {/* Overview */}
+      <section className="py-16 sm:py-24">
+        <div ref={overview.ref} className={`max-w-3xl mx-auto px-5 ${overview.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-5">Who we are</h2>
+          <p className="text-gray-600 leading-relaxed text-base sm:text-lg mb-6">
+            All Access is a customer experience and communication outsourcing company. We work as a B2B partner so organizations can outsource support operations and stay focused on their core work.
+          </p>
+          <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
+            From our office in Kariakoo Dar es Salaam we provide call center services WhatsApp support social media communication market research and practical CX training.
+          </p>
+        </div>
+      </section>
 
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+      {/* Vision Mission Values */}
+      <section className="py-16 sm:py-24 bg-gray-50">
+        <div ref={vision.ref} className={`max-w-5xl mx-auto px-5 ${vision.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <div className="grid sm:grid-cols-2 gap-6 mb-12">
+            <div className={`p-7 sm:p-8 rounded-2xl bg-white border border-gray-100 shadow-sm ${vision.visible ? 'animate-fade-up' : ''}`}>
               <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-3">Vision</h3>
-              <p className="text-gray-800 leading-relaxed text-sm">
+              <p className="text-gray-800 leading-relaxed">
                 To become the leading customer experience and communication outsourcing company in Tanzania and East Africa.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+            <div className={`p-7 sm:p-8 rounded-2xl bg-white border border-gray-100 shadow-sm ${vision.visible ? 'animate-fade-up' : ''}`} style={{ animationDelay: '100ms' }}>
               <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-3">Mission</h3>
-              <p className="text-gray-800 leading-relaxed text-sm">
-                To empower businesses through professional customer service innovative communication systems and data driven customer experience solutions.
+              <p className="text-gray-800 leading-relaxed">
+                To empower businesses through professional customer service innovative communication systems and data driven solutions.
               </p>
             </div>
           </div>
-
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-4">Core values</h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['Professionalism', 'Innovation', 'Integrity', 'Customer Satisfaction', 'Accountability', 'Teamwork', 'Excellence'].map((v) => (
-                <span key={v} className="px-4 py-2 rounded-full bg-gray-100 text-sm font-medium text-gray-800">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-5 text-center">Core values</h3>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {['Professionalism', 'Innovation', 'Integrity', 'Customer Satisfaction', 'Accountability', 'Teamwork', 'Excellence'].map((v, i) => (
+                <span
+                  key={v}
+                  className={`px-4 py-2 rounded-full bg-white border border-gray-100 text-sm font-medium text-gray-800 shadow-sm ${vision.visible ? 'animate-fade-up' : ''}`}
+                  style={{ animationDelay: `${i * 40}ms` }}
+                >
                   {v}
                 </span>
               ))}
@@ -623,17 +670,23 @@ function About() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-5">
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-10 text-center">Our journey</h2>
-          <div className="space-y-0 relative">
-            <div className="absolute left-4 sm:left-6 top-2 bottom-2 w-px bg-gray-200" />
+      <section className="py-16 sm:py-24">
+        <div ref={timelineRef.ref} className="max-w-3xl mx-auto px-5">
+          <h2 className={`font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-10 text-center ${timelineRef.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+            Our journey
+          </h2>
+          <div className="relative space-y-0">
+            <div className="absolute left-4 sm:left-5 top-3 bottom-3 w-px bg-gray-200" />
             {timeline.map((t, i) => (
-              <div key={t.year} className="relative flex gap-6 sm:gap-8 pb-10 last:pb-0 animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
-                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0 z-10 text-[10px] sm:text-xs font-semibold">
+              <div
+                key={`${t.year}-${t.title}`}
+                className={`relative flex gap-5 sm:gap-7 pb-10 last:pb-0 ${timelineRef.visible ? 'animate-fade-up' : 'opacity-0'}`}
+                style={{ animationDelay: `${i * 150}ms` }}
+              >
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0 z-10 text-xs font-semibold">
                   {i + 1}
                 </div>
-                <div className="pt-1">
+                <div className="pt-0.5 sm:pt-1.5">
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">{t.year}</p>
                   <h3 className="font-semibold text-gray-900 mb-1">{t.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{t.desc}</p>
@@ -645,21 +698,35 @@ function About() {
       </section>
 
       {/* Team */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-6xl mx-auto px-5">
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-10 text-center">Team members</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
+      <section className="py-16 sm:py-24 bg-gray-50">
+        <div ref={teamRef.ref} className={`max-w-5xl mx-auto px-5 ${teamRef.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-3 text-center">Our team</h2>
+          <p className="text-gray-500 text-sm text-center mb-10 max-w-md mx-auto">
+            People who handle your customer conversations with care and consistency
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
             {team.map((m, i) => (
-              <div key={m.name} className="group text-center animate-fade-up" style={{ animationDelay: `${i * 80}ms` }}>
-                <div className="overflow-hidden rounded-2xl mb-4 aspect-[3/4] bg-gray-100">
-                  <img
-                    src={m.img}
-                    alt={m.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
+              <div
+                key={m.name}
+                className={`group text-center ${teamRef.visible ? 'animate-fade-up' : ''}`}
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <div className="overflow-hidden rounded-xl mb-3 aspect-square bg-gray-100 border border-gray-100 flex items-center justify-center">
+                  {m.img ? (
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 text-gray-400">
+                      <User className="w-10 h-10 sm:w-11 sm:h-11 mb-1" />
+                      <span className="text-[10px] uppercase tracking-wider">Photo</span>
+                    </div>
+                  )}
                 </div>
-                <h3 className="font-semibold text-gray-900">{m.name}</h3>
-                <p className="text-sm text-gray-500">{m.role}</p>
+                <h3 className="font-semibold text-gray-900 text-sm">{m.name}</h3>
+                <p className="text-xs text-gray-500 mt-0.5">{m.role}</p>
               </div>
             ))}
           </div>
@@ -667,21 +734,22 @@ function About() {
       </section>
 
       {/* Office hours */}
-      <section className="pb-20 sm:pb-28">
-        <div className="max-w-3xl mx-auto px-5">
-          <div className="p-8 rounded-2xl border border-gray-100 bg-gray-50 flex flex-col sm:flex-row gap-8">
+      <section className="py-16 sm:py-24">
+        <div ref={hours.ref} className={`max-w-3xl mx-auto px-5 ${hours.visible ? 'animate-fade-up' : 'opacity-0'}`}>
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-gray-900 mb-8 text-center">When we work</h2>
+          <div className="p-7 sm:p-9 rounded-2xl border border-gray-100 bg-gray-50 flex flex-col sm:flex-row gap-8 sm:gap-12 justify-center">
             <div className="flex items-start gap-3">
-              <Clock className="w-5 h-5 text-gray-400 mt-0.5" />
+              <Clock className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-medium text-gray-900 text-sm">Standard operations</p>
-                <p className="text-gray-600 text-sm">8:00 AM to 5:00 PM Monday to Friday</p>
+                <p className="font-medium text-gray-900 text-sm">Standard hours</p>
+                <p className="text-gray-600 text-sm mt-1">8:00 AM to 5:00 PM Monday to Friday</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Headphones className="w-5 h-5 text-gray-400 mt-0.5" />
+              <Headphones className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-medium text-gray-900 text-sm">Premium operations</p>
-                <p className="text-gray-600 text-sm">24/7 support available</p>
+                <p className="font-medium text-gray-900 text-sm">Premium coverage</p>
+                <p className="text-gray-600 text-sm mt-1">24 hour support available on request</p>
               </div>
             </div>
           </div>
@@ -691,14 +759,14 @@ function About() {
   )
 }
 
-/* ─── Contact ─── */
+/* ─── Contact (black gradient) ─── */
 function Contact() {
   return (
-    <div className="bg-white">
+    <div className="bg-gradient-to-b from-gray-950 via-black to-gray-950 text-white min-h-screen">
       <section className="pt-16 sm:pt-24 pb-12">
         <div className="max-w-6xl mx-auto px-5 text-center animate-fade-up">
-          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-4 text-gray-900">Let us talk</h1>
-          <p className="text-gray-500 max-w-md mx-auto">
+          <h1 className="font-display text-4xl sm:text-5xl font-medium mb-4">Let us talk</h1>
+          <p className="text-gray-400 max-w-md mx-auto">
             We respond quickly and professionally. Share your needs and we will get back to you.
           </p>
         </div>
@@ -706,15 +774,16 @@ function Contact() {
 
       <section className="pb-20 sm:pb-28">
         <div className="max-w-4xl mx-auto px-5">
-          <div className="grid sm:grid-cols-2 gap-12">
+          <div className="grid sm:grid-cols-2 gap-12 lg:gap-16">
+            {/* Contact details */}
             <div className="space-y-8 animate-fade-up">
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-gray-700" />
+                <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1">Address</p>
-                  <p className="text-gray-800 leading-relaxed text-sm">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1.5">Address</p>
+                  <p className="text-gray-200 leading-relaxed text-sm">
                     Kamata Kariakoo GSM Plaza Second Floor
                     <br />
                     Dar es Salaam Tanzania
@@ -722,30 +791,30 @@ function Contact() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-gray-700" />
+                <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1">Phone</p>
-                  <a href="tel:+255782580803" className="text-gray-800 hover:text-black transition text-sm">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1.5">Phone</p>
+                  <a href="tel:+255782580803" className="text-gray-200 hover:text-white transition text-sm">
                     0782 580 803
                   </a>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-gray-700" />
+                <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <Mail className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1">Email</p>
-                  <a href="mailto:info@allaccess.co.tz" className="text-gray-800 hover:text-black transition text-sm">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-1.5">Email</p>
+                  <a href="mailto:info@allaccess.co.tz" className="text-gray-200 hover:text-white transition text-sm">
                     info@allaccess.co.tz
                   </a>
                 </div>
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-3">Follow us</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 mb-4">Follow us</p>
                 <div className="flex gap-3">
                   {[
                     { Icon: FaWhatsapp, href: 'https://wa.me/255782580803', label: 'WhatsApp' },
@@ -760,7 +829,7 @@ function Contact() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={label}
-                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-black hover:text-white transition"
+                      className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-gray-300 hover:bg-white hover:text-black transition"
                     >
                       <Icon className="w-4 h-4" />
                     </a>
@@ -769,34 +838,51 @@ function Contact() {
               </div>
             </div>
 
-            <form className="space-y-4 animate-fade-up delay-100" onSubmit={(e) => e.preventDefault()}>
+            {/* Form – labeled */}
+            <form
+              className="space-y-5 animate-fade-up delay-100 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-sm"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div className="mb-1">
+                <h2 className="font-display text-xl sm:text-2xl font-medium text-white mb-1">Send a message</h2>
+                <p className="text-gray-400 text-sm">We usually reply within one business day</p>
+              </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Full name</label>
+                <label htmlFor="contact-name" className="block text-xs font-medium text-gray-400 mb-1.5">
+                  Full name
+                </label>
                 <input
+                  id="contact-name"
                   type="text"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 text-white text-sm outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition placeholder:text-gray-500"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Email</label>
+                <label htmlFor="contact-email" className="block text-xs font-medium text-gray-400 mb-1.5">
+                  Email address
+                </label>
                 <input
+                  id="contact-email"
                   type="email"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 text-white text-sm outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition placeholder:text-gray-500"
                   placeholder="you@company.com"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Message</label>
+                <label htmlFor="contact-message" className="block text-xs font-medium text-gray-400 mb-1.5">
+                  Your message
+                </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 text-white text-sm outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition resize-none placeholder:text-gray-500"
                   placeholder="How can we help your business"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full py-3.5 bg-black text-white font-semibold rounded-full text-sm hover:bg-gray-800 transition flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-white text-black font-semibold rounded-full text-sm hover:bg-gray-100 transition flex items-center justify-center gap-2"
               >
                 Send message <ArrowRight className="w-4 h-4" />
               </button>
@@ -815,7 +901,7 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
       <div className="max-w-6xl mx-auto px-5">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="sm:col-span-2 lg:col-span-1">
-            <img src="/logo.png" alt="All Access" className="h-21 w-auto object-contain mb-4" />
+            <img src="/logo.png" alt="All Access" className="h-14 w-auto object-contain mb-4" />
             <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
               Customer experience and communication outsourcing for businesses across Tanzania and East Africa.
             </p>
